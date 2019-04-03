@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="./style.css">
+  <title>首页</title>
+</head>
+<body>
+  <h5>您的账户余额为<span id="amount">&&&&amount&&&&</span></h5>
+  <button id="button">付款</button>
+  <script src="./jquery-3.3.1.min.js"></script>
+  <script>
+    button.addEventListener('click',(e)=>{
+      //jQuery代码
+      $.ajax({
+        url:"http://localhost:8020/pay",
+        dataType:"jsonp",
+        success:function(response){
+          if( response=== 'success'){
+        amount.innerText = amount.innerText - 1
+        }
+        }
+      })
+      /*
+      //原生JS代码
+      let script = document.createElement('script')
+      let functionName = 'functionName'+parseInt(Math.random()*10000,10)
+      window[functionName] = function(e){
+      if( e=== 'success'){
+        amount.innerText = amount.innerText - 1
+      }  
+    }
+      script.src='http://localhost:8020/pay?callback='+functionName
+      document.body.appendChild(script)
+      script.onload = function(e){
+        e.currentTarget.remove()
+        delete window[functionName]
+      }
+      script.onerror = function(){
+        alert ('付款失败')
+        e.currentTarget.remove()
+        delete window[functionName]
+      }*/
+
+      /*
+      //使用img标签创建请求
+      let image = document.createElement('img')
+      image.src = '/pay'
+      image.onload = function(){
+        alert ('付款成功')
+        amount.innerText = amount.innerText - 1
+      }
+      image.onerror = function(){
+        alert ('付款失败')
+      }*/
+    })
+  </script>
+  <script src="./main.js"></script>
+</body>
+</html>
